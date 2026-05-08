@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "afkhold",
+	"version": "${version}",
+	"name": "AFKHold",
+	"description": "Holds down your keys for you, so you can AFK",
+	"authors": [
+		"Eng11s"
+	],
+	"contact": {
+		"sources": "https://github.com/Eng11s/AFKHold"
+	},
+	"license": "MIT",
+	"icon": "assets/afkhold/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"dev.eng11s.AFKHold"
+		],
+		"client": [
+			"dev.eng11s.client.AFKHoldClient"
+		],
+		"modmenu": [
+			"dev.eng11s.compat.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"afkhold.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.2",
+		"minecraft": "~26.1.2",
+		"java": ">=25",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": ">=3.9.0+26.1-fabric"
+	},
+	"suggests": {
+		"modmenu": ">=18.0.0-alpha.8"
+	}
+}

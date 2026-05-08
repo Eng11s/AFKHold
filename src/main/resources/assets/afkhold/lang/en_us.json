@@ -1,0 +1,17 @@
+{
+  "key.afkhold.toggle": "Toggle AFKHold",
+  "key.afkhold.mouse": "Unlock Mouse While AFK",
+  "key.category.afkhold.afkhold": "AFKHold",
+
+  "afkhold.config.title": "AFKHold Config",
+  "afkhold.config.category.general": "General",
+  "afkhold.config.category.general.tooltip": "General settings",
+  "afkhold.config.group.settings": "AFKHold Settings",
+  "afkhold.config.group.settings.description": "Settings related to AFKHold",
+  "afkhold.config.option.mute_when_afk": "Mute When AFK",
+  "afkhold.config.option.mute_when_afk.description": "Mutes game when AFKHolding",
+  "afkhold.config.option.kick_on_damage": "Kick On Damage",
+  "afkhold.config.option.kick_on_damage.description": "Automatically disconnects when you take damage while AFKHolding",
+  "afkhold.config.option.kick_on_totem": "Kick On Totem",
+  "afkhold.config.option.kick_on_totem.description": "Automatically disconnects when your totem is popped while AFKHolding"
+}
