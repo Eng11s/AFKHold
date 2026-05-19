@@ -1,7 +1,9 @@
 package dev.eng11s.mixin;
 
 import dev.eng11s.client.AFKHoldClient;
+import dev.eng11s.client.AutoclickerManager;
 import dev.eng11s.client.KeybindHandler;
+import dev.eng11s.config.AFKHoldConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
@@ -106,7 +108,20 @@ public class MinecraftClientMixin {
             KeybindHandler.INSTANCE.getEnabledKeys().forEach(key -> KeyMapping.click(((KeyBindingAccessor) key).getKey()));
             KeybindHandler.INSTANCE.clearWasPaused();
         } else {
-            KeybindHandler.INSTANCE.getEnabledKeys().forEach(key -> key.setDown(true));
+            boolean autoclicker = AFKHoldConfig.get().autoclickerMode;
+            boolean doClick = autoclicker && AutoclickerManager.INSTANCE.shouldClick();
+            for (KeyMapping key : KeybindHandler.INSTANCE.getEnabledKeys()) {
+                if (autoclicker && AutoclickerManager.isMouseButton(key)) {
+                    if (doClick) {
+                        key.setDown(true);
+                        KeyMapping.click(((KeyBindingAccessor) key).getKey());
+                    } else {
+                        key.setDown(false);
+                    }
+                } else {
+                    key.setDown(true);
+                }
+            }
         }
     }
 }

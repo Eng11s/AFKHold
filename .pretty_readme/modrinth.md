@@ -1,14 +1,9 @@
 
-<h1 style="margin: 0;font-weight: 700;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji" align="center">AFKHold</h1><br>
-
-<p align="center">
-<img src="./.pretty_readme/showcase.gif" width=480 height=270 alt="Showcase gif"/>
-</p>
-
-<p align="center">
-<b>This mod was made to simulate taping down buttons while AFK. This can be very useful when using any farm that require holding buttons down, or making tedious tasks like walking/boating long distances simple.</b>
-</p>
-<br>
+<center>
+  <h1 style="margin: 0;font-weight: 700;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji">AFKHold</h1><br>
+  <img src="https://raw.githubusercontent.com/Eng11s/AFKHold/refs/heads/main/.pretty_readme/showcase.gif" width=480 height=270 alt="Showcase gif"/>
+  <p><b>This mod was made to simulate taping down buttons while AFK. This can be very useful when using any farm that require holding buttons down, clicking or making tedious tasks like walking/boating long distances simple.</b></p>
+</center><br>
 
 ## Introduction
 All you need to do is press '**K**' (or you can bind it somewhere else) to keep them held down. Once held down, it frees your mouse and you can do something else.<br>
@@ -20,12 +15,6 @@ If you need to use mouse while held down, you can hold '**LALT**' to look around
 - Disconnect on totem use
 - Autoclicker switch
 - Autoclicker delay
-
-## Download
-
-[Modrinth](https://modrinth.com/mod/afkhold)<br>
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/afkhold)<br>
-[Github Releases](https://github.com/Eng11s/AFKHold/releases)
 
 ## Requirements
 - [Fabric API](https://modrinth.com/mod/fabric-api)
@@ -43,4 +32,3 @@ Optional
 ## Credits
 This is a update/rewrite of [AFKTape](https://github.com/SamIsPoggers/AFKTape) by [SamIsPoggers](https://github.com/SamIsPoggers) due to him not updating it to lastest version (as of now).<br>
 This mod is inspired by [AFKtape](https://www.curseforge.com/minecraft/mc-mods/afktape) by [Kokeria](https://www.curseforge.com/members/kokeria/projects).
-Due to 

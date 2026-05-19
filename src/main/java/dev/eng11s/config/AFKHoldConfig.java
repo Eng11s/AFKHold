@@ -7,6 +7,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 
 import java.nio.file.Path;
@@ -29,6 +30,10 @@ public class AFKHoldConfig {
     public boolean kickOnDamageWhenAfk = false;
     @SerialEntry
     public boolean kickOnTotemPopWhenAfk = false;
+    @SerialEntry
+    public boolean autoclickerMode = false;
+    @SerialEntry
+    public int autoclickerDelay = 100;
 
     public static AFKHoldConfig get() {
         return HANDLER.instance();
@@ -49,11 +54,11 @@ public class AFKHoldConfig {
                         .name(Component.translatable("afkhold.config.category.general"))
                         .tooltip(Component.translatable("afkhold.config.category.general.tooltip"))
                         .group(OptionGroup.createBuilder()
-                                .name(Component.translatable("afkhold.config.group.settings"))
-                                .description(OptionDescription.of(Component.translatable("afkhold.config.group.settings.description")))
+                                .name(Component.translatable("afkhold.config.group.general"))
+                                .description(OptionDescription.of(Component.translatable("afkhold.config.group.general.description")))
                                 .option(Option.<Boolean>createBuilder()
-                                        .name(Component.translatable("afkhold.config.option.mute_when_afk"))
-                                        .description(OptionDescription.of(Component.translatable("afkhold.config.option.mute_when_afk.description")))
+                                        .name(Component.translatable("afkhold.config.general.mute_when_afk"))
+                                        .description(OptionDescription.of(Component.translatable("afkhold.config.general.mute_when_afk.description")))
                                         .binding(
                                                 false,
                                                 () -> get().muteWhenAfk,
@@ -62,8 +67,8 @@ public class AFKHoldConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
-                                        .name(Component.translatable("afkhold.config.option.kick_on_damage"))
-                                        .description(OptionDescription.of(Component.translatable("afkhold.config.option.kick_on_damage.description")))
+                                        .name(Component.translatable("afkhold.config.general.kick_on_damage"))
+                                        .description(OptionDescription.of(Component.translatable("afkhold.config.general.kick_on_damage.description")))
                                         .binding(
                                                 false,
                                                 () -> get().kickOnDamageWhenAfk,
@@ -72,14 +77,41 @@ public class AFKHoldConfig {
                                         .controller(TickBoxControllerBuilder::create)
                                         .build())
                                 .option(Option.<Boolean>createBuilder()
-                                        .name(Component.translatable("afkhold.config.option.kick_on_totem"))
-                                        .description(OptionDescription.of(Component.translatable("afkhold.config.option.kick_on_totem.description")))
+                                        .name(Component.translatable("afkhold.config.general.kick_on_totem"))
+                                        .description(OptionDescription.of(Component.translatable("afkhold.config.general.kick_on_totem.description")))
                                         .binding(
                                                 false,
                                                 () -> get().kickOnTotemPopWhenAfk,
                                                 newVal -> get().kickOnTotemPopWhenAfk = newVal
                                         )
                                         .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .build())
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.translatable("afkhold.config.group.autoclicker"))
+                                .description(OptionDescription.of(Component.translatable("afkhold.config.group.autoclicker.description")))
+                                .option(Option.<Boolean>createBuilder()
+                                        .name(Component.translatable("afkhold.config.autoclicker.autoclicker_mode"))
+                                        .description(OptionDescription.of(Component.translatable("afkhold.config.autoclicker.autoclicker_mode.description")))
+                                        .binding(
+                                                false,
+                                                () -> get().autoclickerMode,
+                                                newVal -> get().autoclickerMode = newVal
+                                        )
+                                        .controller(TickBoxControllerBuilder::create)
+                                        .build())
+                                .option(Option.<Integer>createBuilder()
+                                        .name(Component.translatable("afkhold.config.autoclicker.autoclicker_delay"))
+                                        .description(OptionDescription.of(Component.translatable("afkhold.config.autoclicker.autoclicker_delay.description")))
+                                        .binding(
+                                                100,
+                                                () -> get().autoclickerDelay,
+                                                newVal -> get().autoclickerDelay = newVal
+                                        )
+                                        .controller(opt -> IntegerSliderControllerBuilder.create(opt)
+                                                .range(50, 10000)
+                                                .step(10)
+                                                .formatValue(val -> Component.literal(val + " ms")))
                                         .build())
                                 .build())
                         .build())

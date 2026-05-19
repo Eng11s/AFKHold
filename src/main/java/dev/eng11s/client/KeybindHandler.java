@@ -3,8 +3,10 @@ package dev.eng11s.client;
 import dev.eng11s.config.AFKHoldConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import static net.minecraft.ChatFormatting.*;
 
@@ -43,6 +45,7 @@ public class KeybindHandler {
     public void enable(Set<KeyMapping> keys) {
         running = true;
         enabledKeys.addAll(keys);
+        AutoclickerManager.INSTANCE.reset();
         if (AFKHoldConfig.get().muteWhenAfk) {
             soundManager.mute();
         }
@@ -54,30 +57,35 @@ public class KeybindHandler {
             return new String[0];
         }
 
-        KeyMapping[] keys = enabledKeys.toArray(new KeyMapping[0]);
+        String[] keyNames = enabledKeys.stream()
+                .map(k -> k.getTranslatedKeyMessage().getString().toUpperCase())
+                .distinct()
+                .toArray(String[]::new);
         StringBuilder str = new StringBuilder();
         str.append(WHITE).append("Holding down ");
-        for (int i = 0; i < keys.length; i++) {
-            String keyName = keys[i].getTranslatedKeyMessage().getString().toUpperCase();
-            int size = keys.length;
+        for (int i = 0; i < keyNames.length; i++) {
+            int size = keyNames.length;
             if (i < size - 2) {
-                str.append(AQUA).append(keyName).append(WHITE).append(", ");
+                str.append(AQUA).append(keyNames[i]).append(WHITE).append(", ");
             } else if (i == size - 2) {
-                str.append(AQUA).append(keyName);
+                str.append(AQUA).append(keyNames[i]);
             } else {
                 if (size > 1) str.append(WHITE).append(" and ");
-                str.append(AQUA).append(keyName);
+                str.append(AQUA).append(keyNames[i]);
             }
         }
 
-        String[] msg = new String[4];
-        msg[0] = str.toString();
-        msg[1] = soundManager.isMuted()
-                ? (WHITE + "Sound is " + GRAY + "muted" + WHITE)
-                : (WHITE + "Sound is " + GREEN + "not muted" + WHITE);
-        msg[2] = "";
-        msg[3] = WHITE + "Press " + RED + "ESCAPE" + WHITE + " to exit";
-        return msg;
+        List<String> lines = new ArrayList<>();
+        lines.add(str.toString());
+        if (AutoclickerManager.INSTANCE.isAutoclicking()) {
+            lines.add(WHITE + "Autoclicking every " + GREEN + AFKHoldConfig.get().autoclickerDelay + " ms" + WHITE);
+        }
+        if (soundManager.isMuted()) {
+            lines.add(WHITE + "Sound is " + YELLOW + "muted" + WHITE);
+        }
+        lines.add("");
+        lines.add(WHITE + "Press " + RED + "ESCAPE" + WHITE + " to exit");
+        return lines.toArray(new String[0]);
     }
 
     public void disable() {
