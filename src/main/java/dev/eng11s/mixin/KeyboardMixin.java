@@ -48,7 +48,7 @@ public class KeyboardMixin {
     private void handleEscapePress(CallbackInfo ci) {
         KeybindHandler handler = KeybindHandler.INSTANCE;
         Minecraft mc = Minecraft.getInstance();
-        boolean hasScreen = mc.screen != null;
+        boolean hasScreen = mc.gui.screen() != null;
 
         if (handler.isRunning() && !hasScreen) {
             handler.disable();

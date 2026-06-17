@@ -97,7 +97,7 @@ public class KeybindHandler {
         running = false;
         unpause();
         wasPaused = false;
-        if (Minecraft.getInstance().screen == null) Minecraft.getInstance().mouseHandler.grabMouse();
+        if (Minecraft.getInstance().gui.screen() == null) Minecraft.getInstance().mouseHandler.grabMouse();
     }
 
     public void pause() {

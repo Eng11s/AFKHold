@@ -8,6 +8,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.Options;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.PauseScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
@@ -26,7 +27,7 @@ import java.util.Set;
 public class MinecraftClientMixin {
 
     @Shadow
-    public Screen screen;
+    public Gui gui;
 
     @Shadow
     public LocalPlayer player;
@@ -57,7 +58,7 @@ public class MinecraftClientMixin {
             return;
         }
 
-        if (screen == null) {
+        if (gui.screen() == null) {
             if (AFKHoldClient.unlockMouseKey.isDown()) {
                 mouseHandler.grabMouse();
             } else {
@@ -67,13 +68,13 @@ public class MinecraftClientMixin {
                 KeybindHandler.INSTANCE.unpause();
             }
         } else {
-            if (screen instanceof PauseScreen) {
+            if (gui.screen() instanceof PauseScreen) {
                 if (!hasSavedPauseState) {
                     savedPauseOnLostFocus = options.pauseOnLostFocus;
                     hasSavedPauseState = true;
                 }
                 options.pauseOnLostFocus = false;
-                Minecraft.getInstance().setScreen(null);
+                Minecraft.getInstance().gui.setScreen(null);
                 Minecraft.getInstance().mouseHandler.grabMouse();
             }
             if (!KeybindHandler.INSTANCE.isPaused()) {

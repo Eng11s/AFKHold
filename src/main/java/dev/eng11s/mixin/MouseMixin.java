@@ -15,7 +15,7 @@ public class MouseMixin {
 
     @Inject(at = @At("HEAD"), method = "isMouseGrabbed()Z", cancellable = true)
     private void modifyIsCursorLocked(CallbackInfoReturnable<Boolean> info) {
-        if (Minecraft.getInstance().screen == null && KeybindHandler.INSTANCE.isRunning()) {
+        if (Minecraft.getInstance().gui.screen() == null && KeybindHandler.INSTANCE.isRunning()) {
             info.setReturnValue(true);
             info.cancel();
         }
