@@ -8,10 +8,6 @@ group = project.maven_group
 
 repositories {
     maven {
-        name = "Fabric"
-        url = "https://maven.fabricmc.net/"
-    }
-    maven {
         name = "Modrinth"
         url = "https://api.modrinth.com/maven"
     }
@@ -31,9 +27,6 @@ dependencies {
 
     // ModMenu integration (optional)
     compileOnly "maven.modrinth:modmenu:${project.modmenu_version}"
-	
-	// LWJGL GLFW for key constants
-	implementation "org.lwjgl:lwjgl-glfw:3.3.3"
 }
 
 processResources {
