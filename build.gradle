@@ -27,7 +27,6 @@ dependencies {
 
     // ModMenu integration (optional)
     compileOnly "maven.modrinth:modmenu:${project.modmenu_version}"
-	
 }
 
 processResources {
