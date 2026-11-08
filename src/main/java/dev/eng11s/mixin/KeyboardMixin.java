@@ -1,11 +1,11 @@
 package dev.eng11s.mixin;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import dev.eng11s.client.KeybindHandler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.input.KeyEvent;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,7 +39,7 @@ public class KeyboardMixin {
             }
         }
 
-        if (key == GLFW.GLFW_KEY_ESCAPE) {
+        if (key == InputConstants.KEY_ESCAPE) {
             handleEscapePress(ci);
         }
     }

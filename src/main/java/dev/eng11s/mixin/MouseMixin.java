@@ -28,7 +28,7 @@ public class MouseMixin {
         }
     }
 
-    @Inject(at = @At("HEAD"), method = "onMove(JDD)V", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "onMove(JDDDD)V", cancellable = true)
     private void modifyOnCursorPos(CallbackInfo info) {
         if (KeybindHandler.INSTANCE.isRunning() && !AFKHoldClient.unlockMouseKey.isDown()) {
             info.cancel();
